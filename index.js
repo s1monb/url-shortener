@@ -21,17 +21,18 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("./public"));
 
+// Creates a schema for the mongodb.
+const schema = yup.object().shape({
+    slug: yup.string().matches(/[\w\-]/i), // string, not empty (but can be null), a-z0-9 insensitive
+    url: yup.string().trim().url().required(), // required, string, url
+});
+
 // Create url shortcut
 app.get("/url", async (req, res, next) => {
-    console.log(req.query);
-    let { slug, url } = req.query; // Gets slug and url from req.body
+    let { url, slug } = req.query; // Gets slug and url from req.query
+
     try {
-        // tries to validate
-        await schema.validate({
-            slug,
-            url,
-        });
-        if (!slug) {
+        if (!slug || slug == "") {
             // if slug is not sent in request, its created by nanoid
             slug = nanoid(5);
         } else {
@@ -68,15 +69,6 @@ app.get("/:id", async (req, res) => {
     } catch (error) {
         res.redirect("/?error=link not found");
     }
-});
-
-// Creates a schema for the mongodb.
-const schema = yup.object().shape({
-    slug: yup
-        .string()
-        .trim()
-        .matches(/[\w\-]/i), // string, not empty (but can be null), a-z0-9 insensitive
-    url: yup.string().trim().url().required(), // required, string, url
 });
 
 // Express error handeler
