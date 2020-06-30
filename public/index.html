@@ -9,18 +9,20 @@
     </head>
     <body class="h-screen" style="background-image: url(./img/bg.png); background-size: cover;">
         <div id="banner"></div>
-        <div>
             <form action="/url" method="get" class="md:mt-20">
-                <div class="rounded-lg shadow mx-auto flex flex-col bg-gray-200 lg:w-1/3 md:w-2/3 pt-4 p-10">
-                    <h1 class="text-2xl text-center mb-10 text-purple-600 font-semibold">
+                <div class="rounded-lg shadow mx-auto flex flex-col bg-gray-100 lg:w-1/3 md:w-2/3 pt-4 p-10">
+                    <h1 class="text-2xl text-center mb-1 mt-2 text-purple-600 font-semibold">
                         🛠 URL Shortener 🛠
                     </h1>
+                    <p class="text-center mb-8 text-gray-500 text-sm">
+                        Made by <u><a href="https://github.com/s1monb" target="_blank">s1monb</a></u>
+                    </p>
                     <label for="url" class="mb-1 ml-1 text-lg text-purple-600 font-semibold">
                         Link
                     </label>
-                    <input name="url" id="url" class="rounded border h-8 p-2" type="text" placeholder="https://google.com" />
+                    <input name="url" id="url" class="rounded border h-8 bg-purple-100 p-2" type="text" placeholder="https://google.com" />
                     <label for="slug" class="mb-1 mt-4 ml-1 text-lg text-purple-600 font-semibold"> Slug <span class="text-gray-400">(optional)</span> </label>
-                    <input name="slug" id="slug" class="rounded border h-8 p-2" type="text" placeholder="search-engine" />
+                    <input name="slug" id="slug" class="rounded border bg-purple-100 h-8 p-2" type="text" placeholder="search-engine" />
                     <button type="submit" class="bg-purple-600 mt-4 w-3/4 p-1 mx-auto text-white rounded-full">
                         Create
                     </button>
@@ -32,7 +34,7 @@
 
             if (urlParams.has("success")) {
                 document.getElementById("banner").innerHTML = `
-                <div class="fixed bottom-0 md:top-0 mt-2 inset-x-0 pb-2 sm:pb-5">
+                <div class="fixed bottom-0 md:top-0 mt-2 inset-x-0 pb-2 sm:pb-5 h-20">
                     <div class="max-w-screen-xl mx-auto px-2 sm:px-6 lg:px-8">
                         <div class="p-2 rounded-lg bg-green-600 shadow-lg sm:p-3">
                             <div class="flex items-center justify-between flex-wrap">
@@ -43,8 +45,10 @@
                                         </svg>
                                     </span>
                                     <p class="ml-3 font-medium text-white truncate">
-                                        <span class="hidden md:inline">
-                                            <strong>Success!</strong> Slug with the name of <a href="/${urlParams.get("success")}"><u>${urlParams.get("success")}</u> was created.
+                                        <span class=" md:inline">
+                                            <strong>Success!</strong> <a href="/${urlParams.get("success")}"><u>https://skbapps-url-shortener.herokuapp.com/${urlParams.get(
+                    "success"
+                )}</u></a> was created.
                                         </span>
                                     </p>
                                 </div>
@@ -63,7 +67,7 @@
 
             if (urlParams.has("error")) {
                 document.getElementById("banner").innerHTML = `
-                <div class="fixed bottom-0 md:top-0 mt-2 inset-x-0 pb-2 sm:pb-5">
+                <div class="fixed bottom-0 md:top-0 mt-2 inset-x-0 pb-2 sm:pb-5 h-20">
                     <div class="max-w-screen-xl mx-auto px-2 sm:px-6 lg:px-8">
                         <div class="p-2 rounded-lg bg-red-600 shadow-lg sm:p-3">
                             <div class="flex items-center justify-between flex-wrap">
